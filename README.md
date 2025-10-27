@@ -66,4 +66,10 @@ rt: Reaction time in seconds
 correct: Boolean indicating if response was correct
 fixation_duration: Duration of fixation period
 
+## Modifications 
+
+I added another independent variable to change the dot colors in the experiment. The color is randomly assigned with the different motion levels.
+The dot color is recorded in each trial to check whether the color affects accuracy and time. 
+
+Dot Colors = white, red, or gray
 
