@@ -87,6 +87,7 @@ DOT_SPEED = 0.5  # degrees/frame
 DOT_FIELD_SIZE = 2  # degrees
 COHERENCE_LEVELS = [0.05, 0.1, 0.2, 0.4, 0.8]  # Fixed coherence levels
 DIRECTIONS = [0, 180]  # Right (0°) and Left (180°)
+COLORS = ['white', 'red', 'gray']
 FIXATION_MIN = 0.5  # seconds
 FIXATION_MAX = 1.5  
 
@@ -108,11 +109,13 @@ dots = DotStim(
 trial_list = []
 for coherence in COHERENCE_LEVELS:
     for direction in DIRECTIONS:
+        for color_name in COLORS :
         # Multiple repetitions of each condition
-        for rep in range(0,int(trialn)/5):  
+            for rep in range(0,int(trialn/5)):  
             trial_list.append({
                 'coherence': coherence,
                 'direction': direction,
+                'color': color_name,
                 'correct_response': 'left' if direction == 180 else 'right'
             })
 
@@ -130,6 +133,7 @@ for trial in trials:
     # Set dot parameters for this trial
     dots.coherence = trial['coherence']
     dots.dir = trial['direction']
+    dots.color = trial['color']
     
     # Reset keyboard and clock
     kb.clock.reset()
@@ -158,6 +162,7 @@ for trial in trials:
     trials.addData('response', response)
     trials.addData('rt', rt)
     trials.addData('correct', response == trial['correct_response'])
+    trials.addData ('color', trial['color'])
     trials.addData('fixation_duration', fixation_time)
     
     # Brief inter-trial interval
